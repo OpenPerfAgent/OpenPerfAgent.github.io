@@ -9,7 +9,7 @@
   };
   const data = [...table.querySelectorAll('tbody tr')].map(row => {
     const [name, init, opt, tokens] = [...row.cells].map(cell => cell.textContent);
-    return {name, init, opt, tokens, setup: minutes(init), optimization: minutes(opt), count: parseFloat(tokens)};
+    return {name, init, opt, tokens: Math.round(parseFloat(tokens)) + 'M', setup: minutes(init), optimization: minutes(opt), count: parseFloat(tokens)};
   });
   const root = document.createElement('section');
   root.className = 'run-costs';
@@ -61,7 +61,7 @@
       if (isTime) stack.innerHTML = `<span class="cost-opt" style="flex:${d.optimization}"></span><span class="cost-init" style="flex:${d.setup}"></span>`;
       else stack.innerHTML = '<span class="cost-token" style="flex:1"></span>';
       const label = document.createElement('span'); label.className = 'cost-label'; label.textContent = d.name;
-      button.append(stack, label); bars.append(button); buttons.push(button);
+      stack.style.setProperty('--bar-size', stack.style.height); button.append(stack, label); bars.append(button); buttons.push(button);
       button.addEventListener('pointerenter', () => select(index));
       button.addEventListener('pointerleave', () => select(pinned));
       button.addEventListener('focus', () => select(index));

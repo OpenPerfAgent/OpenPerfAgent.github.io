@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="editorial.css?v=20260918-issue-context">
 <link rel="stylesheet" href="interactions.css?v=13">
 <link rel="stylesheet" href="trace-palette.css?v=1">
-<script defer src="restructured-costs.js?v=2"></script>
+<script defer src="restructured-costs.js?v=3"></script>
 <script defer src="code-blocks.js?v=2"></script>
 <script defer src="step-scenarios.js?v=38"></script>
 <link rel="stylesheet" href="restructured.css?v=1">
@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="article-toc.css?v=1">
 <script defer src="walkthrough-video.js?v=1"></script>
 <link rel="stylesheet" href="experiment-details.css?v=1">
+<link rel="stylesheet" href="article-layout.css?v=1">
 </head>
 <body class="mlsys-draft">
 <header class="site-header" id="top"><a href="#top">A performance tool for AI workloads</a><button id="theme" onclick="t()" aria-label="Toggle light and dark theme">Appearance ◐</button></header>
@@ -319,7 +320,7 @@ function t(){
   r.setAttribute('data-theme', d==='dark'?'light':'dark');
 }
 const contents=document.querySelector('#contents');
-const wideLayout=matchMedia('(min-width:800px)');
+const wideLayout=matchMedia('(min-width:1280px)');
 function syncContents(){contents.open=wideLayout.matches;}
 syncContents();wideLayout.addEventListener('change',syncContents);
 const tocLabels={
