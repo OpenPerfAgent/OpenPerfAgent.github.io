@@ -1,0 +1,7 @@
+/* Isolated additions for the alternate article; original assets are unchanged. */
+.draft-note,.evidence-note { color:var(--ink-3); font-size:.86rem; }
+.case-extra { margin:2rem 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:1rem 0; }
+.case-extra > summary { cursor:pointer; font-weight:600; padding:.4rem 0; }
+.case-extra > .case { margin-top:1.5rem; }
+#optimization-results td:nth-child(3) { white-space:normal; min-width:8rem; }
+#optimization-results td:last-child { min-width:8rem; }

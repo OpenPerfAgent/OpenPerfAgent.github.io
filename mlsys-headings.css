@@ -1,0 +1,103 @@
+/* Heading hierarchy scoped to the MLSys draft. */
+.mlsys-draft #case-deep-dives{font:400 25px/1.35 var(--serif);margin:44px 0 22px;letter-spacing:-.015em}
+.mlsys-draft .case h4{font:400 21px/1.4 var(--serif);letter-spacing:-.01em;margin:0 0 18px}
+.mlsys-draft #case-deep-dives + .case{margin-top:0;padding-top:0;border-top:0}
+.mlsys-draft .trace-heading{gap:8px 12px;align-items:baseline}
+.mlsys-draft .trace-heading h5{font:500 16px/1.45 var(--sans);letter-spacing:normal;margin:0}
+.mlsys-draft .trace-figure-number{font:500 10px/1.5 var(--mono);letter-spacing:.06em}
+@media(max-width:700px){.mlsys-draft #case-deep-dives{font-size:23px}.mlsys-draft .case h4{font-size:20px}.mlsys-draft .trace-heading h5{font-size:15px}}
+
+/* Avoid stacked borders below the correctness disclosure. */
+.mlsys-draft #correctness-demo > .comparison-extra{border-bottom:0}
+
+.mlsys-draft h2#using-the-tool{border-top:0;font-size:clamp(34px,4vw,44px)}
+
+.mlsys-draft h2#using-the-tool code{font-family:var(--mono);font-size:1em;line-height:inherit;background:none;padding:0}
+
+.mlsys-draft h2#using-the-tool .command-prompt{font-family:var(--mono);color:var(--ink-3);font-weight:400}
+
+/* Editorial TODO notes. */
+.mlsys-draft .editorial-todo{--todo-ink:#c44725;color:var(--todo-ink)}
+.mlsys-draft .editorial-todo code{color:inherit;background:none;padding:0}
+:root[data-theme=dark] .mlsys-draft .editorial-todo{--todo-ink:#ff906d}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .mlsys-draft .editorial-todo{--todo-ink:#ff906d}}
+
+/* Minimal frame for the plugin walkthrough. */
+.mlsys-draft .video-option video{display:block;width:100%;height:auto;aspect-ratio:16/9;margin:0;border:0;border-radius:0;background:#1c1e2e}
+.mlsys-draft .video-option-shell{overflow:hidden;border:1px solid var(--rule);border-radius:4px}
+
+.mlsys-draft #correctness-demo{border-block:0;padding:0;margin:18px 0 20px}
+.mlsys-draft #correctness-demo .parity-verdict{margin-bottom:0}
+
+.mlsys-draft .tool-support-note{margin-top:32px}
+
+/* Brief overview before introducing the plugin. */
+.mlsys-draft .compact-patterns{margin:18px 0 30px;padding:0 0 16px;border-top:0}
+.compact-patterns .step-tabs{display:flex;overflow-x:auto}
+.compact-patterns .step-tabs button,.compact-patterns .step-tabs button:last-child{flex:1 0 auto;min-height:42px;padding:9px 10px;white-space:nowrap;font-size:11px}
+.compact-patterns .pattern-sketch{padding:14px 0 4px;max-width:620px}
+.compact-patterns .pattern-row{margin-bottom:12px}
+.compact-patterns .step-operation-description{margin-top:8px}
+.compact-patterns .step-operation-description>p{font-size:13px;line-height:1.6}
+.compact-patterns .pattern-pair{padding:14px 0 4px;gap:18px}
+.compact-patterns .pattern-pair>div+div{padding-left:18px}
+.compact-patterns .hardware-sketch{margin:14px auto 8px}
+.compact-patterns .hardware-heading,.compact-patterns .hardware-time-axis{margin-bottom:10px}
+@media(max-width:600px){.compact-patterns .pattern-pair>div+div{padding-left:0}}
+
+.mlsys-draft .repo-scope-note{font-size:12px;line-height:1.6;color:var(--ink-3);margin:12px 0 18px}
+
+/* Let the FastVideo timeline follow its introduction directly. */
+.mlsys-draft #fastvideo-trace{margin-top:18px;padding-top:0;border-top:0}
+.mlsys-draft #fastvideo-trace>.trace-heading,
+.mlsys-draft #fastvideo-trace>.trace-story{display:none}
+.mlsys-draft #fastvideo-trace .trace-chart{padding-top:0}
+
+/* Keep the case-study traces visually consistent. */
+.mlsys-draft #funasr-trace{margin-top:18px;padding-top:0;border-top:0}
+.mlsys-draft #funasr-trace>.trace-heading,
+.mlsys-draft #funasr-trace>.trace-story{display:none}
+.mlsys-draft #funasr-trace .trace-chart{padding-top:0}
+
+.mlsys-draft h3#try-it{font-size:clamp(28px,3vw,34px);line-height:1.25}
+
+.mlsys-draft #optimization-results .repo-stars{white-space:nowrap;font-variant-numeric:tabular-nums;font-size:11px;color:var(--ink-3);margin-left:5px}
+
+/* Equal plotting areas keep the two coordination scenarios aligned. */
+.compact-patterns .coordination-pair{gap:36px}
+.compact-patterns .coordination-pair>div{min-width:0;position:relative}
+.compact-patterns .coordination-pair>div+div{border-left:0;padding-left:0}
+.compact-patterns .coordination-pair>div+div::before{content:"";position:absolute;left:-18px;top:0;bottom:0;border-left:1px solid var(--rule)}
+.coordination-intro,.coordination-legend{font:11px/1.7 var(--sans);color:var(--ink-2);margin:10px 0 0}
+@media(max-width:600px){.compact-patterns .coordination-pair{gap:18px}.compact-patterns .coordination-pair>div+div::before{display:none}}
+
+.coordination-pair .coordination-idle{fill:var(--ink);opacity:.055}
+.coordination-pair .coordination-wait{fill:var(--ink);opacity:.11}
+.coordination-pair .sync-dependency{stroke:var(--ink-2);stroke-width:1;opacity:.7}
+.coordination-pair .sync-note{font-size:9px}
+.coordination-legend{display:flex;flex-wrap:wrap;gap:6px 16px}
+.coordination-legend span{display:inline-flex;align-items:center;gap:5px}
+.coordination-key{display:inline-block;width:10px;height:7px;border-radius:1px}
+.coordination-key.step-cpu{background:var(--timeline-host)}
+.coordination-key.step-compute{background:var(--timeline-compute,#6c9690)}
+.coordination-key.coordination-idle{background:var(--ink);opacity:.12}
+
+.coordination-pair .launch-block-label{font:9px var(--sans);fill:var(--timeline-bar-ink)}
+.coordination-pair .launch-kernel-label{font-size:8px}
+.launch-gap-bracket{fill:none;stroke:var(--ink-2);stroke-width:1}
+
+.more-findings-details{margin:24px 0;border:0;padding:0}
+.more-findings-details>summary{cursor:pointer;font:500 14px/1.6 var(--sans);color:var(--ink)}
+.more-findings-details[open]>summary{margin-bottom:16px}
+
+.mlsys-draft .video-option-shell{position:relative;border-radius:10px}
+.walkthrough-cover{position:absolute;inset:0;width:100%;border:0;padding:7%;text-align:left;cursor:pointer;color:#f3f2ec;background:linear-gradient(105deg,#171c1a 5%,rgba(23,28,26,.98) 53%,rgba(23,28,26,.88));display:flex;flex-direction:column;justify-content:center;align-items:flex-start;font-family:var(--sans)}
+.walkthrough-cover[hidden]{display:none}
+.walkthrough-eyebrow{font-size:clamp(9px,1.1vw,12px);letter-spacing:.14em;color:#a5b9ac;margin-bottom:5%}
+.walkthrough-title{font-size:clamp(23px,3.8vw,46px);line-height:1.25;font-weight:500;letter-spacing:-.025em}
+.walkthrough-title>span{color:#b3d2bc}
+.walkthrough-subtitle{font-size:clamp(10px,1.25vw,14px);color:#b7bfb7;margin-top:4%}
+.walkthrough-play{display:flex;align-items:center;gap:10px;font-size:clamp(10px,1.2vw,13px);margin-top:6%;color:#e0ece3}
+.walkthrough-play>span{display:grid;place-items:center;width:32px;height:32px;border:1px solid #667c6e;border-radius:50%;font-size:11px;padding-left:2px}
+.walkthrough-cover:hover .walkthrough-play>span{background:#365142}
+.walkthrough-cover:focus-visible{outline:3px solid #b3d2bc;outline-offset:-5px}

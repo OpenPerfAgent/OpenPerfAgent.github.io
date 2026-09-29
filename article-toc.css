@@ -1,0 +1,18 @@
+/* Local to this article; earlier drafts keep their original layout. */
+.mlsys-draft .article-nav{display:block;position:static;width:auto;margin:24px 32px 0;max-height:none;overflow:visible}
+.mlsys-draft .article-nav summary{font:500 12px/1.5 var(--sans);text-transform:none;letter-spacing:0;color:var(--ink-2);cursor:pointer}
+.mlsys-draft .article-nav ul{margin:14px 0 0;columns:1}
+.mlsys-draft .article-nav a{font:12px/1.45 var(--sans);padding:6px 10px;border-left:1px solid var(--rule);color:var(--ink-3);transition:color .12s}
+.mlsys-draft .article-nav .toc-major:not(:first-child){margin-top:10px}
+.mlsys-draft .article-nav .toc-minor a{padding-left:20px;font-size:11px}
+.mlsys-draft .article-nav a:hover{color:var(--ink)}
+.mlsys-draft .article-nav a[aria-current=location]{color:var(--accent);border-left:2px solid var(--accent);background:var(--surface);font-weight:600}
+@media(min-width:800px){
+.mlsys-draft main{max-width:900px;width:calc(100% - 216px);margin-left:max(216px,calc((100vw - 1160px)/2 + 220px));margin-right:0;padding-inline:24px}
+.mlsys-draft .article-nav{position:fixed;top:100px;left:max(20px,calc((100vw - 1160px)/2));width:180px;margin:0;max-height:calc(100dvh - 124px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:6px}
+.mlsys-draft .article-nav summary{list-style:none;pointer-events:none;padding:0 10px;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.mlsys-draft .article-nav summary::-webkit-details-marker{display:none}
+}
+@media(max-width:799px){.mlsys-draft .article-nav{margin-inline:22px}.mlsys-draft .article-nav summary{pointer-events:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{.mlsys-draft .article-nav{display:none}.mlsys-draft main{width:auto;max-width:none;margin:0;padding:0}}

@@ -1,0 +1,17 @@
+/* Shared semantic colors for real traces and schematic timelines. */
+:root {
+  --timeline-compute: #648e87;
+  --timeline-host: #8997ac;
+  --timeline-transfer: #be9b64;
+  --timeline-other: #95978d;
+  --timeline-scope: #d9ddd7;
+  --timeline-scope-emphasis: #bcc7bd;
+  --timeline-bar-ink: #18241f;
+}
+.step-compute { fill: var(--timeline-compute); }
+.step-cpu { fill: var(--timeline-host); }
+.step-transfer { fill: var(--timeline-transfer); }
+.step-bar-text { fill: var(--timeline-bar-ink); }
+.key-compute { background: var(--timeline-compute); }
+.key-cpu { background: var(--timeline-host); }
+.key-transfer { background: var(--timeline-transfer); }
