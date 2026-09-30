@@ -57,7 +57,7 @@
 <thead><tr><th scope="col">Axis</th><th scope="col">Kernel optimization</th><th scope="col">Whole-job optimization</th></tr></thead>
 <tbody>
 <tr><th scope="row">Code changes</th><td>Usually concentrated in an operator implementation.</td><td>May span model code, data loading, dependencies, configuration, and kernels.</td></tr>
-<tr><th scope="row">Constraints</th><td>Operator semantics, numerical error, supported shapes, and hardware limits.</td><td>Model behavior, memory use, maintainability, and compatibility with other callers.</td></tr>
+<tr><th scope="row">Optimization constraints</th><td>Operator semantics, numerical error, supported shapes, and hardware limits.</td><td>Model behavior, memory use, maintainability, and compatibility with other callers.</td></tr>
 <tr><th scope="row">Correctness</th><td>Compare outputs with a reference using the task’s tolerances.</td><td>Each job may require checking different intermediate values with different error tolerances.</td></tr>
 <tr><th scope="row">Performance goal</th><td>Reduce kernel latency.</td><td>Reduce the target job’s runtime; verify that local gains improve the whole job.</td></tr>
 </tbody></table>
