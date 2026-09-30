@@ -7,7 +7,7 @@
     "category": "CPU blocking",
     "button": "CPU preprocessing",
     "title": "The GPU waits while the CPU prepares its input",
-    "explanation": "The GPU is ready, but the CPU is still preparing its input. The agent finds the CPU work holding it up.",
+    "explanation": "The GPU is ready, but the CPU is still preparing its input.",
     "label": "Waiting for input",
     "examples": "Loading data, encoding PNGs, or decoding video on the CPU while the GPU waits.",
     "lanes": [
@@ -32,15 +32,16 @@
       1,
       0,
       55
-    ]
+    ],
+    "solution": "The agent shortens CPU data preparation or overlaps it with the previous step’s GPU computation."
   },
   {
     "category": "Data movement",
     "button": "GPU all-reduce",
     "title": "The GPU waits for communication to finish",
-    "explanation": "Communication can run alongside compute. When compute finishes first, the GPU has to wait. The agent looks for ways to shorten or hide that wait.",
+    "explanation": "Communication can run alongside compute. When compute finishes first, the GPU has to wait.",
     "label": "Waiting for all-reduce",
-    "examples": "Copying from unpinned CPU memory; moving fp32 outputs to the CPU before converting them to uint8, instead of converting on the GPU and moving fewer bytes.",
+    "examples": "Limited communication–compute overlap; unpinned CPU memory; transferring fp32 outputs before converting them to uint8.",
     "lanes": [
       "GPU",
       "All-reduce"
@@ -69,13 +70,14 @@
       0,
       38,
       65
-    ]
+    ],
+    "solution": "The agent looks for ways to shorten communication or overlap it with other GPU computation."
   },
   {
     "category": "Launch & sync overhead",
     "button": "Small kernels + .item()",
     "title": "Short operations leave long gaps between useful work",
-    "explanation": "Launch overhead and synchronization can leave the GPU waiting on the CPU. The agent looks for ways to batch launches and remove unnecessary synchronization.",
+    "explanation": "Launch overhead and synchronization can leave the GPU waiting on the CPU.",
     "label": "Launch / sync gaps",
     "examples": "Launching lots of tiny kernels for compute or communication; repeatedly making the CPU wait for GPU results, for example when indexing with a boolean mask.",
     "lanes": [
@@ -136,13 +138,14 @@
       1,
       62,
       88
-    ]
+    ],
+    "solution": "The agent looks for ways to batch launches and remove unnecessary synchronization."
   },
   {
     "category": "Load imbalance",
     "button": "All-reduce after uneven work",
     "title": "The other GPUs wait for the slowest one",
-    "explanation": "One GPU finishes early and waits for another to catch up. The agent checks whether the work can be shared more evenly.",
+    "explanation": "One GPU finishes early and waits for another to catch up.",
     "label": "Waiting for rank 1",
     "lanes": [
       "Rank 0",
@@ -153,28 +156,41 @@
       [
         0,
         0,
-        36,
+        32,
         "compute"
       ],
       [
         1,
         0,
-        85,
+        76,
         "compute"
+      ],
+      [
+        0,
+        76,
+        100,
+        "transfer"
+      ],
+      [
+        1,
+        76,
+        100,
+        "transfer"
       ]
     ],
     "gap": [
       0,
-      36,
-      85
-    ]
+      32,
+      76
+    ],
+    "solution": "The agent checks whether the work can be shared more evenly."
   },
   {
     "category": "Inefficient kernels",
     "button": "Attention backend / fallback",
     "title": "Same attention work, different runtime on B200",
-    "explanation": "The agent should find the best kernel for the workload and hardware.",
-    "label": "Busy \u2260 efficient",
+    "explanation": "The kernel does not make full use of the GPU.",
+    "label": "Busy ≠ efficient",
     "lanes": [
       "Backend",
       "GPU"
@@ -188,7 +204,8 @@
         "compute"
       ]
     ],
-    "gap": null
+    "gap": null,
+    "solution": "The agent should find the best kernel for the workload and hardware."
   }
 ];
   root.innerHTML='<div class="step-tabs" role="tablist" aria-label="Performance problem"></div><div class="step-panel" id="step-operation-panel" role="tabpanel" tabindex="0"></div>';
@@ -209,7 +226,7 @@
   });
   // Specialized sketches separate launch overhead from synchronization and routing from timing.
   function miniTrack(name,bars,gaps=[]){
-    return `<div class="pattern-row"><span class="pattern-lane">${name}</span><div class="pattern-track">${bars.map(([start,end,type,label=''])=>`<span class="pattern-bar pattern-${type}" style="left:${start}%;width:${end-start}%">${label}</span>`).join('')}${gaps.map(([start,end])=>`<i class="pattern-gap" style="left:${start}%;width:${end-start}%">${index===0?`<span class="pattern-inline-label">${type==='cpu'?'Preparing input':'GPU computation'}</span>`:''}</i>`).join('')}</div></div>`;
+    return `<div class="pattern-row"><span class="pattern-lane">${name}</span><div class="pattern-track">${bars.map(([start,end,type,label=''])=>`<span class="pattern-bar pattern-${type}" style="left:${start}%;width:${end-start}%">${label}</span>`).join('')}${gaps.map(([start,end])=>`<i class="pattern-gap" style="left:${start}%;width:${end-start}%">${index===0?`<span class="pattern-inline-label">${type==='cpu'?'Preparing input':'GPU computation'}</span>`:index===3&&!(row===0&&type==='transfer')?`<span class="pattern-inline-label">${type==='compute'?'Compute':'All-reduce'}</span>`:''}</i>`).join('')}</div></div>`;
   }
   function smallOpsSketch(){
     const rect=(x,y,w,kind)=>`<rect x="${x}" y="${y}" width="${w}" height="14" rx="2" class="${kind}"/>`;
@@ -231,7 +248,7 @@
       <text x="201" y="112" text-anchor="middle" class="sync-note">Waiting for the</text>
       <text x="201" y="124" text-anchor="middle" class="sync-note">next launch</text>
       </svg>
-      <p>The CPU prepares the next launch while the GPU runs. Each tiny kernel finishes before that launch is ready.</p></div>
+      </div>
       <div><h4>Synchronization overhead</h4>
       <svg class="sync-sketch" viewBox="0 0 400 132" role="img" aria-label="A .item() call blocks the CPU until a GPU result is ready. The CPU then resumes and launches the next kernel.">
       <defs><marker id="sync-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="currentColor"/></marker></defs>
@@ -264,13 +281,13 @@
     buttons.forEach((button,i)=>{button.setAttribute('aria-selected',String(i===index));button.tabIndex=i===index?0:-1;});
     panel.setAttribute('aria-labelledby',buttons[index].id);
     const tracks=scene.lanes.map((name,row)=>{
-      const bars=scene.bars.filter(b=>b[0]===row).map(([,start,end,type])=>`<i class="pattern-bar pattern-${type}" style="left:${start}%;width:${end-start}%">${index===0?`<span class="pattern-inline-label">${type==='cpu'?'Preparing input':'GPU computation'}</span>`:''}</i>`).join('');
+      const bars=scene.bars.filter(b=>b[0]===row).map(([,start,end,type])=>`<i class="pattern-bar pattern-${type}" style="left:${start}%;width:${end-start}%">${index===0?`<span class="pattern-inline-label">${type==='cpu'?'Preparing input':'GPU computation'}</span>`:index===3&&!(row===0&&type==='transfer')?`<span class="pattern-inline-label">${type==='compute'?'Compute':'All-reduce'}</span>`:''}</i>`).join('');
       const gap=scene.gap&&scene.gap[0]===row?`<i class="pattern-gap" style="left:${scene.gap[1]}%;width:${scene.gap[2]-scene.gap[1]}%">${index===0?'<span class="pattern-inline-label">Waiting for input</span>':''}</i>`:'';
       const path=index===4&&row===0?'<span class="pattern-path">Fallback / unsuitable backend</span>':'';
-      return `<div class="pattern-row"><span class="pattern-lane">${name}</span><div class="pattern-track">${bars}${gap}${path}${index===0&&row===0?'<span class="pattern-input-ready"><span>Input ready</span></span>':''}</div></div>`;
+      return `<div class="pattern-row"><span class="pattern-lane">${name}</span><div class="pattern-track">${bars}${gap}${path}${index===3&&row===0?'<span class="imbalance-collective"><span>All-reduce</span></span><span class="imbalance-bracket"><span>Waiting due to load imbalance</span></span>':''}${index===0&&row===0?'<span class="pattern-input-ready"><span>Input ready</span></span>':''}</div></div>`;
     }).join('');
-    const sketch=index===2?smallOpsSketch():index===4?backendSketch():`<div class="pattern-sketch${index===0?' pattern-cpu-blocking':''}" role="img" aria-label="${scene.title}. ${scene.explanation}"><div class="pattern-time">Time →</div>${tracks}<div class="pattern-caption"${index===0?' hidden':''}>${scene.gap?'<i class="pattern-gap-key"></i>':''}${scene.label}</div></div>`;
-    panel.innerHTML=`${sketch}<div class="step-operation-description"><p>${scene.explanation}</p><p class="step-other-examples"><span>Common causes</span>${scene.examples}</p></div>`;
+    const sketch=index===2?smallOpsSketch():index===4?backendSketch():`<div class="pattern-sketch${index===0?' pattern-cpu-blocking':index===3?' pattern-imbalance':''}" role="img" aria-label="${scene.title}. ${scene.explanation}"><div class="pattern-time">Time →</div>${tracks}<div class="pattern-caption"${index===0||index===3?' hidden':''}>${scene.gap?'<i class="pattern-gap-key"></i>':''}${scene.label}</div></div>`;
+    panel.innerHTML=`${sketch}<div class="step-operation-description"><p><strong>Pattern:</strong> ${scene.explanation}</p><p><strong>Common causes:</strong> ${scene.examples}</p><p><strong>Potential solution:</strong> ${scene.solution}</p></div>`;
   }
   show(0);
 })();

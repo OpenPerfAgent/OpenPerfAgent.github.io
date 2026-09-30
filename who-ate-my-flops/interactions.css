@@ -73,3 +73,24 @@
 .pattern-input-ready:after{content:"";position:absolute;bottom:0;left:-4px;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:6px solid var(--accent)}
 .pattern-input-ready>span{position:absolute;left:9px;top:11px;white-space:nowrap;font:10px/1.4 var(--sans);color:var(--accent)}
 .pattern-cpu-blocking .pattern-caption[hidden]{display:none}
+
+/* Consistent captions across all five performance patterns. */
+.step-operation-description>p+p{margin-top:12px}
+.step-operation-description>p>strong{font:600 1em/1.6 var(--sans);color:var(--ink)}
+
+/* Collective communication follows the imbalanced compute phase. */
+.pattern-imbalance .pattern-track{height:39px}
+.pattern-imbalance .pattern-bar,.pattern-imbalance .pattern-gap{height:38px;display:flex;align-items:center;justify-content:center}
+.pattern-imbalance .pattern-row:has(.imbalance-bracket){margin-bottom:80px}
+.imbalance-bracket{position:absolute;left:32%;width:44%;top:46px;height:9px;border:1px solid var(--ink-3);border-top:0}
+.imbalance-bracket>span{display:block;position:absolute;top:14px;width:100%;text-align:center;font:12px/1.4 var(--sans);color:var(--ink)}
+.pattern-imbalance .pattern-caption[hidden]{display:none}
+@media(max-width:600px){.imbalance-bracket>span{font-size:13px}.pattern-imbalance .pattern-row:has(.imbalance-bracket){margin-bottom:100px}}
+
+.pattern-imbalance .pattern-time{margin-bottom:12px}
+.imbalance-collective{position:absolute;left:32%;width:68%;top:0;height:38px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.imbalance-collective>span{text-align:center;font:500 11px/1.2 var(--sans);color:var(--timeline-bar-ink)}
+@media(max-width:600px){.imbalance-collective>span{font-size:13px}}
+
+.pattern-imbalance .pattern-gap{background:var(--timeline-transfer);border-radius:2px 0 0 2px}
+.pattern-imbalance .pattern-transfer{border-radius:0 2px 2px 0}
