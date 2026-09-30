@@ -61,3 +61,15 @@
 @media(max-width:600px){.hardware-time-axis{margin-left:110px}}
 
 #optimization-results td:nth-child(5){white-space:nowrap;font-size:11px}.pr-merged{color:var(--accent);font-weight:600}.pr-unmerged{color:var(--ink-3)}
+
+/* CPU dependency: labels live on the work and waiting regions. */
+.pattern-cpu-blocking .pattern-track{height:37px}
+.pattern-cpu-blocking .pattern-bar,.pattern-cpu-blocking .pattern-gap{height:36px;display:flex;align-items:center;justify-content:center}
+.pattern-cpu-blocking .pattern-row:first-of-type{margin-bottom:40px}
+.pattern-cpu-blocking .pattern-row:has(.pattern-input-ready){margin-bottom:40px}
+.pattern-inline-label{font:500 11px/1.2 var(--sans);text-align:center;padding:2px 4px;color:var(--timeline-bar-ink)}
+.pattern-gap .pattern-inline-label{background:var(--surface);color:var(--ink);border-radius:3px}
+.pattern-input-ready{position:absolute;left:55%;top:36px;height:40px;border-left:1px solid var(--accent);z-index:1}
+.pattern-input-ready:after{content:"";position:absolute;bottom:0;left:-4px;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:6px solid var(--accent)}
+.pattern-input-ready>span{position:absolute;left:9px;top:11px;white-space:nowrap;font:10px/1.4 var(--sans);color:var(--accent)}
+.pattern-cpu-blocking .pattern-caption[hidden]{display:none}

@@ -209,7 +209,7 @@
   });
   // Specialized sketches separate launch overhead from synchronization and routing from timing.
   function miniTrack(name,bars,gaps=[]){
-    return `<div class="pattern-row"><span class="pattern-lane">${name}</span><div class="pattern-track">${bars.map(([start,end,type,label=''])=>`<span class="pattern-bar pattern-${type}" style="left:${start}%;width:${end-start}%">${label}</span>`).join('')}${gaps.map(([start,end])=>`<i class="pattern-gap" style="left:${start}%;width:${end-start}%"></i>`).join('')}</div></div>`;
+    return `<div class="pattern-row"><span class="pattern-lane">${name}</span><div class="pattern-track">${bars.map(([start,end,type,label=''])=>`<span class="pattern-bar pattern-${type}" style="left:${start}%;width:${end-start}%">${label}</span>`).join('')}${gaps.map(([start,end])=>`<i class="pattern-gap" style="left:${start}%;width:${end-start}%">${index===0?`<span class="pattern-inline-label">${type==='cpu'?'Preparing input':'GPU computation'}</span>`:''}</i>`).join('')}</div></div>`;
   }
   function smallOpsSketch(){
     const rect=(x,y,w,kind)=>`<rect x="${x}" y="${y}" width="${w}" height="14" rx="2" class="${kind}"/>`;
@@ -264,12 +264,12 @@
     buttons.forEach((button,i)=>{button.setAttribute('aria-selected',String(i===index));button.tabIndex=i===index?0:-1;});
     panel.setAttribute('aria-labelledby',buttons[index].id);
     const tracks=scene.lanes.map((name,row)=>{
-      const bars=scene.bars.filter(b=>b[0]===row).map(([,start,end,type])=>`<i class="pattern-bar pattern-${type}" style="left:${start}%;width:${end-start}%"></i>`).join('');
-      const gap=scene.gap&&scene.gap[0]===row?`<i class="pattern-gap" style="left:${scene.gap[1]}%;width:${scene.gap[2]-scene.gap[1]}%"></i>`:'';
+      const bars=scene.bars.filter(b=>b[0]===row).map(([,start,end,type])=>`<i class="pattern-bar pattern-${type}" style="left:${start}%;width:${end-start}%">${index===0?`<span class="pattern-inline-label">${type==='cpu'?'Preparing input':'GPU computation'}</span>`:''}</i>`).join('');
+      const gap=scene.gap&&scene.gap[0]===row?`<i class="pattern-gap" style="left:${scene.gap[1]}%;width:${scene.gap[2]-scene.gap[1]}%">${index===0?'<span class="pattern-inline-label">Waiting for input</span>':''}</i>`:'';
       const path=index===4&&row===0?'<span class="pattern-path">Fallback / unsuitable backend</span>':'';
-      return `<div class="pattern-row"><span class="pattern-lane">${name}</span><div class="pattern-track">${bars}${gap}${path}</div></div>`;
+      return `<div class="pattern-row"><span class="pattern-lane">${name}</span><div class="pattern-track">${bars}${gap}${path}${index===0&&row===0?'<span class="pattern-input-ready"><span>Input ready</span></span>':''}</div></div>`;
     }).join('');
-    const sketch=index===2?smallOpsSketch():index===4?backendSketch():`<div class="pattern-sketch" role="img" aria-label="${scene.title}. ${scene.explanation}"><div class="pattern-time">Time →</div>${tracks}<div class="pattern-caption">${scene.gap?'<i class="pattern-gap-key"></i>':''}${scene.label}</div></div>`;
+    const sketch=index===2?smallOpsSketch():index===4?backendSketch():`<div class="pattern-sketch${index===0?' pattern-cpu-blocking':''}" role="img" aria-label="${scene.title}. ${scene.explanation}"><div class="pattern-time">Time →</div>${tracks}<div class="pattern-caption"${index===0?' hidden':''}>${scene.gap?'<i class="pattern-gap-key"></i>':''}${scene.label}</div></div>`;
     panel.innerHTML=`${sketch}<div class="step-operation-description"><p>${scene.explanation}</p><p class="step-other-examples"><span>Common causes</span>${scene.examples}</p></div>`;
   }
   show(0);
