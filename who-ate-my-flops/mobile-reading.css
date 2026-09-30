@@ -1,12 +1,10 @@
 /* Mobile reading: retain content without shrinking dense components. */
 @media(max-width:600px){
- #compact-comparison table,#compact-comparison tbody{display:block;width:100%}
- #compact-comparison thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
- #compact-comparison tr{display:block;padding:18px 0;border-top:1px solid var(--rule)}
- #compact-comparison th[scope="row"]{display:block;width:100%;padding:0 0 10px;border:0;font-size:16px;font-weight:600}
- #compact-comparison td{display:block;padding:8px 0;border:0;font-size:14px;line-height:1.65;overflow-wrap:normal}
- #compact-comparison td:before{display:block;content:attr(data-label);font-size:12px;font-weight:600;color:var(--accent);margin-bottom:3px}
- #compact-comparison .comparison-extra summary{font-size:14px}
+ #compact-comparison th,#compact-comparison td{font-size:13px;line-height:1.55;padding:12px 6px;overflow-wrap:normal}
+ #compact-comparison th:first-child{width:29%}
+ #compact-comparison th[scope="row"]{font-size:13px}
+ #compact-comparison thead th{font-size:11px;letter-spacing:0;text-transform:none}
+
  .mlsys-draft .compact-patterns .step-tabs button{font-size:13px;white-space:normal}
  .pattern-lane,.pattern-caption{font-size:13px}.pattern-time{font-size:12px}
  .pattern-cpu-blocking .pattern-track{height:45px}
@@ -33,4 +31,10 @@
  .mlsys-draft .cost-axis{margin-left:94px;margin-right:70px}
  .mlsys-draft .cost-axis>span{font-size:12px}
  .mlsys-draft .cost-legend,.mlsys-draft .cost-hint{font-size:13px}
+}
+
+/* Match the wide context figure on desktop. */
+@media(min-width:1100px){
+ .mlsys-draft main>#compact-comparison{width:calc(100% + 120px);max-width:none;margin-left:-60px}
+ #compact-comparison th:first-child{width:20%}
 }
