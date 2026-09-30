@@ -1,0 +1,23 @@
+/* Warm ivory preview; content and layout are unchanged. */
+:root[data-theme="light"] {
+ color-scheme: light;
+ --plane: #f1ecdf;
+ --bg: #f1ecdf;
+ --surface: #e9e4d7;
+ --ink: #292c28;
+ --ink-2: #555c53;
+ --ink-3: #697165;
+ --rule: #d8d1c2;
+ --ring: #c5cdbe;
+ --accent: #386657;
+ --warm: #96603d;
+ --code-bg: #e8e2d5;
+}
+:root[data-theme="light"] .mlsys-draft .hero-actions a {background:#fcfaf5;}
+.mlsys-draft .site-header {border-bottom-color:var(--rule);}
+:root[data-theme="light"] ::selection {background:#d1dfca;color:#24382d;}
+
+.mlsys-draft .theme-toggle{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px 12px;border:1px solid var(--rule);border-radius:999px;background:transparent;color:var(--ink-2);font:500 12px/1.4 var(--sans);cursor:pointer;white-space:nowrap;letter-spacing:0}
+.mlsys-draft .theme-toggle:hover{color:var(--ink);border-color:var(--accent)}
+.theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@media(max-width:700px){.top-links{gap:18px}.theme-toggle{margin-left:auto}}
