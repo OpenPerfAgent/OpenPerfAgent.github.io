@@ -50,9 +50,11 @@
 <p>The same loop can also be used to optimize a whole training or inference job. But the optimization target is no longer a single operation. Changes may span the codebase, and each job has its own constraints and correctness requirements.</p>
 <p>Optimizing a whole job means reasoning about how its parts interact. A faster kernel may expose a data-loading bottleneck; overlapping communication with computation may require changes to scheduling and memory use. Evaluating an optimization requires checking both its effect on end-to-end runtime and whether it preserves the job’s behavior.</p>
 
+<p>The table below summarizes the axes along which whole-job optimization differs from kernel-only optimization.</p>
+
 <section id="compact-comparison" aria-label="Kernel and whole-job optimization comparison">
 <table id="core-differences">
-<thead><tr><th scope="col">Dimension</th><th scope="col">Kernel optimization</th><th scope="col">Whole-job optimization</th></tr></thead>
+<thead><tr><th scope="col">Axis</th><th scope="col">Kernel optimization</th><th scope="col">Whole-job optimization</th></tr></thead>
 <tbody>
 <tr><th scope="row">Changes</th><td>Usually concentrated in an operator implementation.</td><td>May span model code, data loading, dependencies, configuration, and kernels.</td></tr>
 <tr><th scope="row">Constraints</th><td>Operator semantics, numerical error, supported shapes, and hardware limits.</td><td>Model behavior, memory use, maintainability, and compatibility with other callers.</td></tr>
@@ -62,7 +64,7 @@
 <details class="comparison-extra">
 <summary>Inputs, tools, and experiment costs</summary>
 <table id="comparison-practical-details">
-<thead><tr><th scope="col">Dimension</th><th scope="col">Kernel optimization</th><th scope="col">Whole-job optimization</th></tr></thead>
+<thead><tr><th scope="col">Axis</th><th scope="col">Kernel optimization</th><th scope="col">Whole-job optimization</th></tr></thead>
 <tbody>
 <tr><th scope="row">Inputs</th><td>Reference implementation, test inputs, target GPU.</td><td>Repository, launch command, data, hardware, and task constraints.</td></tr>
 <tr><th scope="row">Profiling</th><td><a href="https://developer.nvidia.com/nsight-compute">Nsight Compute</a>: kernel details and hardware counters.</td><td><a href="https://developer.nvidia.com/nsight-systems">Nsight Systems</a> or <code>torch.profiler</code>: CPU–GPU timelines, transfers, and synchronization.</td></tr>
