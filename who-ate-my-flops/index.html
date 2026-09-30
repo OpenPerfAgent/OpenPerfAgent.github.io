@@ -134,7 +134,7 @@
 <p><a href="https://github.com/OpenPerfAgent/who-ate-my-flops">Get the plugin and setup instructions ↗</a></p>
 
 <h3 id="under-the-hood">How we designed the harness</h3>
-<p>We rely on the underlying foundation model to reason about performance and propose optimizations. Our harness provides (1) workload context and profiling evidence to ground that reasoning, (2) checks to verify correctness during optimization, and (3) guidance for the agent to ask users questions and align on goals and constraints.</p>
+<p>We rely on the underlying foundation model to reason about performance and propose optimizations. Our harness provides (1) workload context and profiling evidence to ground that reasoning, (2) correctness checks during optimization, and (3) guidance for the agent to ask users questions and align on goals and constraints.</p>
 <h4>Two key contexts: computation structure and runtime profiling</h4>
 
 <figure class="context-map" id="context-map" aria-label="Computation structure linked to runtime profiling and extracted views">
@@ -167,8 +167,8 @@
 <p>Together, these two contexts help the agent build a mental performance model of the job: where time goes and why. It can compare the measured runtime with the computation structure to identify performance problems that either view alone might miss. We also record source locations (<code>file:line</code>) in the computation structure, so the agent can trace runtime symptoms back to the relevant code.</p>
 </div>
 
-<h4 id="checking-results">Correctness verification</h4>
-<p>Verifying that a change preserves an AI job’s behavior is more complex than checking a single kernel’s outputs. So we built a small tool, <a href="https://github.com/OpenPerfAgent/parity">parity</a>, to help with this verification. It records intermediate values and compares them across runs. For training, these might include inputs, loss, and gradient norms:</p>
+<h4 id="checking-results">Correctness checks</h4>
+<p>Checking whether a change preserves an AI job’s behavior is more complex than checking a single kernel’s outputs. So we built a small tool, <a href="https://github.com/OpenPerfAgent/parity">parity</a>, to help with these checks. It records intermediate values and compares them across runs. For training, these should include inputs, loss, and gradient norms:</p>
 
 <pre data-language="python"><code>for step, batch in enumerate(loader):
     # Record an input checksum.
@@ -197,7 +197,7 @@ FAIL
 
 </figure>
 
-<p>With parity, users only need to reason about what to check and how much numerical error is acceptable. They can leave the performance work to the agent without having to work through all the ML systems details. In practice, the agent can also suggest where to add checks, though we sometimes ask for stricter ones. We fix random seeds and data order, then repeat the baseline runs to measure the remaining numerical variation. This helps the agent distinguish natural variation from differences introduced by an optimization.</p>
+<p>With parity, users only need to reason about what to check and how much numerical error is acceptable. They can leave the performance work to the agent without having to work through all the ML systems details. In practice, the agent can suggest where to add checks, but we sometimes request additional checks for greater confidence in correctness. We fix random seeds and data order, then repeat the baseline runs to measure the remaining numerical variation. This helps the agent distinguish natural variation from differences introduced by an optimization.</p>
 
 <h4>Asking users questions proactively</h4>
 <p>Users may forget to mention some requirements. Those without an ML systems background may not know which details matter. So we let the agent proactively ask questions during <code>init</code> to clarify the user’s goals, constraints, and preferences before optimization begins.</p>
