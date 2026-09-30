@@ -22,7 +22,7 @@
 <script defer src="walkthrough-video.js?v=1"></script>
 <link rel="stylesheet" href="experiment-details.css?v=1">
 <link rel="stylesheet" href="article-layout.css?v=1">
-<link rel="stylesheet" href="article-brand.css?v=2">
+<link rel="stylesheet" href="article-brand.css?v=4">
 <link rel="stylesheet" href="theme.css?v=1">
 <link rel="stylesheet" href="mobile-reading.css?v=5">
 </head>
@@ -40,7 +40,7 @@
 <p class="authors">By <a href="https://tarzanzhao.github.io/" title="Hexu Zhao · Impossible, Inc.">Hexu Zhao<sup>1</sup></a>, <a href="https://haochengxi.github.io/" title="Haocheng Xi · UC Berkeley">Haocheng Xi<sup>2</sup></a>, <a href="https://yichuan-w.github.io/" title="Yichuan Wang · UC Berkeley">Yichuan Wang<sup>2</sup></a>, <a href="https://fugtemypt123.github.io/" title="Shaofeng Yin · Impossible, Inc.">Shaofeng Yin<sup>1</sup></a>, <a href="https://lvzhaoyang.github.io/" title="Zhaoyang Lv · Impossible, Inc.">Zhaoyang Lv<sup>1</sup></a>, <a href="https://havenfeng.github.io/" title="Haiwen Feng · Impossible, Inc.">Haiwen Feng<sup>1</sup></a>, <a href="https://xiuyuli.com/" title="Xiuyu Li · Impossible, Inc.">Xiuyu Li<sup>1</sup></a>, <a href="https://cs.nyu.edu/~apanda/" title="Aurojit Panda · NYU">Aurojit Panda<sup>3</sup></a>, and <a href="https://jinyangli.github.io/" title="Jinyang Li · NYU">Jinyang Li<sup>3</sup></a></p>
 <p class="affiliations"><span><sup>1</sup> Impossible, Inc.</span><span><sup>2</sup> UC Berkeley</span><span><sup>3</sup> NYU</span></p>
 </div>
-<div class="hero-actions"><a href="https://github.com/OpenPerfAgent/who-ate-my-flops">GitHub <span aria-hidden="true">↗</span></a></div>
+<div class="hero-actions"><a href="https://github.com/OpenPerfAgent/who-ate-my-flops">GitHub <span aria-hidden="true">↗</span></a><p class="publication-date">Published <time datetime="2026-09-30">Sep 30, 2026</time></p></div>
 
 <p>AI agents can now write and optimize individual GPU kernels. But there is more to a job’s performance than the speed of its kernels. Data transfers, CPU work, and synchronization can also slow it down.</p>
 <p>Recently, we have been trying agents to improve the end-to-end performance of AI jobs. We built <code>/who-ate-my-flops</code>, a small plugin for Claude Code and Codex, to provide profiling tools, workload context, and correctness checks. Performance improvements made with the tool were merged into six open-source repositories: FunASR, FastVideo, gsplat, Ultralytics, Unsloth, and SGLang, with measured speedups of up to 3.6×. This blog describes what we learned. We hope the tool can complement kernel-design agents and help extend the use of AI agents to end-to-end optimization of AI workloads.</p>
