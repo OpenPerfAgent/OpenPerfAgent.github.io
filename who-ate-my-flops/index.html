@@ -197,7 +197,7 @@ FAIL
 
 </figure>
 
-<p>With parity, users only need to reason about what to check and how much numerical error is acceptable. They can leave the performance work to the agent without having to work through all the ML systems details. In practice, the agent can suggest where to add checks, but we sometimes request additional checks for greater confidence in correctness. We fix random seeds and data order, then repeat the baseline runs to measure the remaining numerical variation. This helps the agent distinguish natural variation from differences introduced by an optimization.</p>
+<p>With parity, users only need to reason about what to check and how much numerical error is acceptable. They can leave the performance work to the agent without having to work through all the ML systems details. In practice, the agent can suggest where to add checks, but we sometimes request additional checks for greater confidence in correctness. We fix random seeds and data order, then run the baseline multiple times to measure the natural variation in the recorded values. This helps the agent distinguish natural variation from differences introduced by an optimization.</p>
 
 <h4>Asking users questions proactively</h4>
 <p>Users may forget to mention some requirements. Those without an ML systems background may not know which details matter. So we let the agent proactively ask questions during <code>init</code> to clarify the user’s goals, constraints, and preferences before optimization begins.</p>
