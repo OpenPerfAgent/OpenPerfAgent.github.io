@@ -69,7 +69,7 @@
 <tr><th scope="row">Inputs</th><td>Reference implementation, test inputs, target GPU.</td><td>Repository, launch command, data, hardware, and task constraints.</td></tr>
 <tr><th scope="row">Profiling</th><td><a href="https://developer.nvidia.com/nsight-compute">Nsight Compute</a>: kernel details and hardware counters.</td><td><a href="https://developer.nvidia.com/nsight-systems">Nsight Systems</a> or <code>torch.profiler</code>: CPU–GPU timelines, transfers, and synchronization.</td></tr>
 <tr><th scope="row">Hardware resources</th><td>Often an isolated benchmark on one GPU.</td><td>CPU work, host memory, data, and one or more GPUs.</td></tr>
-<tr><th scope="row">Feedback</th><td>Often a short, repeatable microbenchmark.</td><td>May require initialization, compilation, and multiple steps before a change can be evaluated.</td></tr>
+<tr><th scope="row">Feedback to agent</th><td>Often a short, repeatable microbenchmark.</td><td>May require initialization, compilation, and multiple steps before a change can be evaluated.</td></tr>
 </tbody></table>
 </details>
 </section>
