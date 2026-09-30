@@ -202,7 +202,7 @@ FAIL
 
 <h4>Asking users questions proactively</h4>
 <p>Users may forget to mention some requirements. Those without an ML systems background may not know which details matter. So we let the agent proactively ask questions during <code>init</code> to clarify the user’s goals, constraints, and preferences before optimization begins.</p>
-<p>For example, are you an MLSys engineer or an algorithm engineer less familiar with systems? This helps the agent communicate more clearly with you. It also asks what changes are allowed: can it adjust configurations, install faster backends, change Python code, or modify Triton/CUDA kernels? Some users prefer smaller changes that are easier to understand, review, and maintain.</p>
+<p>For example, the agent asks, “Are you an ML systems engineer, or an algorithm engineer less familiar with systems?” This helps it tailor its explanations to your background. It also asks what changes are allowed: can it adjust configurations, install faster backends, change Python code, or modify Triton/CUDA kernels? Some users prefer smaller changes that are easier to understand, review, and maintain.</p>
 
 <p class="tool-support-note">In <code>/who-ate-my-flops</code>, we also provide helpers to turn a job into a repeatable benchmark, reduce file sizes and experiment runtime, and track changes and measurements across experiments. As foundation models improve, agents might need less of this guidance. For now, it helps avoid wasted attempts. The implementation details are in the <a href="https://github.com/OpenPerfAgent/who-ate-my-flops">repository</a>.</p>
 
@@ -242,7 +242,7 @@ FAIL
 
 
 
-<p>Not every finding required this much investigation. In our internal use at the company, we sometimes found a missing fast kernel library or a performance option that had not been enabled. The README may not mention these, so Claude Code can miss them when setting up the environment. <code>/who-ate-my-flops</code> can catch and fix these setup issues for you too.</p>
+<p>Not every finding required this much investigation. In our own workloads, the agent sometimes found a missing fast kernel library or a performance-related flag that had not been enabled. These requirements may be missing from the installation instructions, so a coding agent can overlook them when setting up the environment. <code>/who-ate-my-flops</code> can catch and fix these setup issues too.</p>
 
 
 
