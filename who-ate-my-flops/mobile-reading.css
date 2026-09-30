@@ -1,0 +1,36 @@
+/* Mobile reading: retain content without shrinking dense components. */
+@media(max-width:600px){
+ #compact-comparison table,#compact-comparison tbody{display:block;width:100%}
+ #compact-comparison thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ #compact-comparison tr{display:block;padding:18px 0;border-top:1px solid var(--rule)}
+ #compact-comparison th[scope="row"]{display:block;width:100%;padding:0 0 10px;border:0;font-size:16px;font-weight:600}
+ #compact-comparison td{display:block;padding:8px 0;border:0;font-size:14px;line-height:1.65;overflow-wrap:normal}
+ #compact-comparison td:before{display:block;content:attr(data-label);font-size:12px;font-weight:600;color:var(--accent);margin-bottom:3px}
+ #compact-comparison .comparison-extra summary{font-size:14px}
+ .mlsys-draft .compact-patterns .step-tabs button{font-size:13px;white-space:normal}
+ .pattern-lane,.pattern-caption{font-size:13px}.pattern-time{font-size:12px}
+ .pattern-cpu-blocking .pattern-track{height:45px}
+ .pattern-cpu-blocking .pattern-bar,.pattern-cpu-blocking .pattern-gap{height:44px}
+ .pattern-inline-label{font-size:13px;line-height:1.25}
+ .pattern-input-ready{top:44px}.pattern-input-ready>span{font-size:12px}
+ .mlsys-draft .compact-patterns .step-operation-description>p{font-size:14px}
+ .context-map-grid>section{padding:14px}
+ .context-map .context-tree,.context-map button{font-size:14px}
+ .context-tree small,.context-json-file code{font-size:12px}
+ .context-map .context-schedule p,.context-map .context-schedule,.context-map .context-view small{font-size:13px}
+ .context-map .context-views{grid-template-columns:1fr}
+ .context-map .context-view:last-child{grid-column:auto}
+ .context-map .context-view h6,.context-map .context-view button,.context-map .rank-line,.context-map .rank-overlap{font-size:14px}
+ .context-map .context-view button span{width:70px}
+ .context-map .context-view button em{font-size:13px}
+ .context-map .context-save-arrow span{font-size:13px}
+ .context-timeline-scroll{overflow-x:auto;margin-bottom:8px}
+ .context-runtime>h5:after{content:"Swipe the timeline to see more →";display:block;margin-top:10px;font:12px/1.5 var(--sans);color:var(--ink-2)}
+ .context-runtime #context-runtime-timeline{display:block;min-width:440px;margin:0}
+ .context-runtime .ctx-axis{font-size:14px}
+ .mlsys-draft .cost-label,.mlsys-draft .cost-stack:after{font-size:14px}
+ .mlsys-draft .cost-bar{padding-left:94px;padding-right:70px;height:54px}
+ .mlsys-draft .cost-axis{margin-left:94px;margin-right:70px}
+ .mlsys-draft .cost-axis>span{font-size:12px}
+ .mlsys-draft .cost-legend,.mlsys-draft .cost-hint{font-size:13px}
+}
